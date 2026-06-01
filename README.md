@@ -68,6 +68,49 @@ cd markitdown
 pip install -e 'packages/markitdown[all]'
 ```
 
+## Install as a Global Tool
+
+You can install `markitdown` as a globally available CLI tool with `uv`:
+
+```bash
+uv tool install git+https://github.com/sakoho81/markitdown.git --directory packages/markitdown
+```
+
+After installation, the `markitdown` command is available anywhere:
+
+```bash
+markitdown document.pdf -o document.md
+```
+
+To upgrade to the latest version:
+
+```bash
+uv tool upgrade markitdown
+```
+
+To uninstall:
+
+```bash
+uv tool uninstall markitdown
+```
+
+## OpenCode Skill
+
+This repo includes an [OpenCode](https://opencode.ai) skill that teaches AI coding assistants to use markitdown for document conversion. To install it globally:
+
+```bash
+git clone git@github.com:sakoho81/markitdown.git /tmp/markitdown-skill
+ln -s /tmp/markitdown-skill/.opencode/skills/markitdown ~/.config/opencode/skills/markitdown
+```
+
+Or, if you already have the repo cloned:
+
+```bash
+ln -s "$(pwd)/.opencode/skills/markitdown" ~/.config/opencode/skills/markitdown
+```
+
+The skill will automatically trigger when you ask OpenCode to convert files to markdown, or when it encounters unsupported file formats it needs to read.
+
 ## Usage
 
 ### Command-Line
