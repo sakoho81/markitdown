@@ -4,14 +4,24 @@ description: >
   Convert documents (PDF, DOCX, PPTX, XLSX, images, audio, HTML, EPUB, ZIP,
   CSV, JSON, Outlook .msg, Jupyter notebooks, and more) to Markdown using
   the markitdown CLI. Use when the user asks to convert a file or batch of
-  files to markdown, when you encounter an unsupported file format that you
-  need to read, or when the user mentions document conversion, extraction,
-  or text analysis from binary files.
+  files to markdown, when the user mentions document conversion or
+  extraction, or when you encounter an unsupported binary file that you
+  need to propose converting before reading.
 ---
 
 # MarkItDown File Conversion
 
 Use the globally installed `markitdown` CLI to convert files to Markdown.
+
+## Always Confirm Before Converting
+
+**Never run markitdown without asking the user first.** Before converting any file:
+
+1. Explain what you want to do (e.g., "I'll convert `report.pdf` to markdown to read it")
+2. Wait for the user to confirm
+3. Only then run the command
+
+This applies to all conversions — single files, batch processing, and stdin piping. Do not convert anything silently.
 
 ## Availability Check
 
@@ -83,7 +93,7 @@ for f in /path/to/dir/*.docx; do markitdown "$f" -o "${f%.docx}.md"; done
 - User says "convert this PDF to markdown"
 - User says "extract text from this PowerPoint"
 - User says "I need to read this Excel file"
-- You encounter a binary file (PDF, DOCX, XLSX, etc.) that you cannot read directly
+- **Proposing** to convert a binary file (PDF, DOCX, XLSX, etc.) that you cannot read directly — ask first
 - User asks to batch process documents
 - User asks to analyze content of non-text files
 - User mentions "markitdown" or "mark it down"
