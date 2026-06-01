@@ -99,17 +99,14 @@ uv tool uninstall markitdown
 This repo includes an [OpenCode](https://opencode.ai) skill that teaches AI coding assistants to use markitdown for document conversion. To install it globally:
 
 ```bash
-git clone git@github.com:sakoho81/markitdown.git /tmp/markitdown-skill
-ln -s /tmp/markitdown-skill/.opencode/skills/markitdown ~/.config/opencode/skills/markitdown
-```
-
-Or, if you already have the repo cloned:
-
-```bash
 ln -s "$(pwd)/.opencode/skills/markitdown" ~/.config/opencode/skills/markitdown
 ```
 
-The skill will automatically trigger when you ask OpenCode to convert files to markdown, or when it encounters unsupported file formats it needs to read.
+Or, from any directory, replace `$REPO_PATH` with the path to your clone:
+
+```bash
+ln -s "$REPO_PATH/.opencode/skills/markitdown" ~/.config/opencode/skills/markitdown
+```
 
 ## Usage
 
