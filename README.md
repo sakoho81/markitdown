@@ -73,7 +73,7 @@ pip install -e 'packages/markitdown[all]'
 You can install `markitdown` as a globally available CLI tool with `uv`:
 
 ```bash
-uv tool install ./packages/markitdown
+uv tool install './packages/markitdown[all]'
 ```
 
 After installation, the `markitdown` command is available anywhere:

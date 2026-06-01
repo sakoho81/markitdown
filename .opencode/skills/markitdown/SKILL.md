@@ -34,8 +34,8 @@ markitdown --version
 If the command is not found, tell the user:
 
 ```
-markitdown is not installed. Install it from your local clone:
-  uv tool install /path/to/markitdown/packages/markitdown
+markitdown is not installed. Install it with all extras from your local clone:
+  uv tool install '/path/to/markitdown/packages/markitdown[all]'
 ```
 
 Do not proceed until the user confirms they have installed it.
