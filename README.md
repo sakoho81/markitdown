@@ -68,6 +68,46 @@ cd markitdown
 pip install -e 'packages/markitdown[all]'
 ```
 
+## Install as a Global Tool
+
+You can install `markitdown` as a globally available CLI tool with `uv`:
+
+```bash
+uv tool install './packages/markitdown[all]'
+```
+
+After installation, the `markitdown` command is available anywhere:
+
+```bash
+markitdown document.pdf -o document.md
+```
+
+To upgrade to the latest version:
+
+```bash
+uv tool upgrade markitdown
+```
+
+To uninstall:
+
+```bash
+uv tool uninstall markitdown
+```
+
+## OpenCode Skill
+
+This repo includes an [OpenCode](https://opencode.ai) skill that teaches AI coding assistants to use markitdown for document conversion. To install it globally:
+
+```bash
+ln -s "$(pwd)/.opencode/skills/markitdown" ~/.config/opencode/skills/markitdown
+```
+
+Or, from any directory, replace `$REPO_PATH` with the path to your clone:
+
+```bash
+ln -s "$REPO_PATH/.opencode/skills/markitdown" ~/.config/opencode/skills/markitdown
+```
+
 ## Usage
 
 ### Command-Line
@@ -276,6 +316,27 @@ from openai import OpenAI
 
 client = OpenAI()
 md = MarkItDown(llm_client=client, llm_model="gpt-4o", llm_prompt="optional custom prompt")
+result = md.convert("example.jpg")
+print(result.text_content)
+```
+
+**With a local Ollama model:**
+
+```bash
+# Pull a vision-capable model (only needed once)
+ollama pull llama3.2-vision:11b
+
+# Or a smaller alternative:
+# ollama pull minicpm-v:8b
+```
+
+```python
+from markitdown import MarkItDown
+from openai import OpenAI
+
+# Ollama exposes an OpenAI-compatible API at localhost:11434
+client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+md = MarkItDown(llm_client=client, llm_model="llama3.2-vision:11b")
 result = md.convert("example.jpg")
 print(result.text_content)
 ```
