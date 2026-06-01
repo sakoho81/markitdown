@@ -34,8 +34,8 @@ markitdown --version
 If the command is not found, tell the user:
 
 ```
-markitdown is not installed. Install it globally with:
-  uv tool install git+https://github.com/sakoho81/markitdown.git --directory packages/markitdown
+markitdown is not installed. Install it from your local clone:
+  uv tool install /path/to/markitdown/packages/markitdown
 ```
 
 Do not proceed until the user confirms they have installed it.

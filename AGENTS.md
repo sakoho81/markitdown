@@ -26,7 +26,7 @@ uv run markitdown-mcp --help
 
 For global installation (available outside the repo):
 ```bash
-uv tool install git+https://github.com/sakoho81/markitdown.git --directory packages/markitdown
+uv tool install ./packages/markitdown
 ```
 
 ## Supported File Formats
