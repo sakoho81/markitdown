@@ -34,43 +34,27 @@ Markdown-formatted text, and understand it well. As a side benefit, Markdown con
 are also highly token-efficient.
 
 ## Prerequisites
-MarkItDown requires Python 3.10 or higher. It is recommended to use a virtual environment to avoid dependency conflicts.
 
-With the standard Python installation, you can create and activate a virtual environment using the following commands:
+MarkItDown requires Python 3.12 or higher and [`uv`](https://docs.astral.sh/uv/).
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-If using `uv`, you can create a virtual environment with:
+Clone the repo and sync dependencies:
 
 ```bash
-uv venv --python=3.12 .venv
-source .venv/bin/activate
-# NOTE: Be sure to use 'uv pip install' rather than just 'pip install' to install packages in this virtual environment
-```
-
-If you are using Anaconda, you can create a virtual environment with:
-
-```bash
-conda create -n markitdown python=3.12
-conda activate markitdown
-```
-
-## Installation
-
-To install MarkItDown, use pip: `pip install 'markitdown[all]'`. Alternatively, you can install it from the source:
-
-```bash
-git clone git@github.com:microsoft/markitdown.git
+git clone git@github.com:sakoho81/markitdown.git
 cd markitdown
-pip install -e 'packages/markitdown[all]'
+uv venv
+uv sync --all-packages
+```
+
+## Usage (from within the repo)
+
+```bash
+uv run markitdown path-to-file.pdf -o document.md
 ```
 
 ## Install as a Global Tool
 
-You can install `markitdown` as a globally available CLI tool with `uv`:
+Optionally, install `markitdown` as a globally available CLI tool:
 
 ```bash
 uv tool install './packages/markitdown[all]'
@@ -82,16 +66,10 @@ After installation, the `markitdown` command is available anywhere:
 markitdown document.pdf -o document.md
 ```
 
-To upgrade to the latest version:
+To upgrade:
 
 ```bash
 uv tool upgrade markitdown
-```
-
-To uninstall:
-
-```bash
-uv tool uninstall markitdown
 ```
 
 ## OpenCode Skill
@@ -129,10 +107,10 @@ cat path-to-file.pdf | markitdown
 ```
 
 ### Optional Dependencies
-MarkItDown has optional dependencies for activating various file formats. Earlier in this document, we installed all optional dependencies with the `[all]` option. However, you can also install them individually for more control. For example:
+MarkItDown has optional dependencies for activating various file formats. When installing globally, add extras as needed:
 
 ```bash
-pip install 'markitdown[pdf, docx, pptx]'
+uv tool install './packages/markitdown[pdf, docx, pptx]'
 ```
 
 will install only the dependencies for PDF, DOCX, and PPTX files.
@@ -175,6 +153,8 @@ The `markitdown-ocr` plugin adds OCR support to PDF, DOCX, PPTX, and XLSX conver
 
 ```bash
 pip install markitdown-ocr
+# or with uv:
+# uv tool install markitdown-ocr
 pip install openai  # or any OpenAI-compatible client
 ```
 
@@ -370,35 +350,31 @@ You can help by looking at issues or helping review PRs. Any issue or PR is welc
 
 |            | All                                                          | Especially Needs Help from Community                                                                                                      |
 | ---------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **Issues** | [All Issues](https://github.com/microsoft/markitdown/issues) | [Issues open for contribution](https://github.com/microsoft/markitdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22open+for+contribution%22) |
-| **PRs**    | [All PRs](https://github.com/microsoft/markitdown/pulls)     | [PRs open for reviewing](https://github.com/microsoft/markitdown/pulls?q=is%3Apr+is%3Aopen+label%3A%22open+for+reviewing%22)              |
+| **Issues** | [All Issues](https://github.com/sakoho81/markitdown/issues) | [Issues open for contribution](https://github.com/sakoho81/markitdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22open+for+contribution%22) |
+| **PRs**    | [All PRs](https://github.com/sakoho81/markitdown/pulls)     | [PRs open for reviewing](https://github.com/sakoho81/markitdown/pulls?q=is%3Apr+is%3Aopen+label%3A%22open+for+reviewing%22)              |
 
 </div>
 
 ### Running Tests and Checks
 
-- Navigate to the MarkItDown package:
+- Run all tests from the repo root:
 
   ```sh
-  cd packages/markitdown
+  uv run pytest packages/*/tests/ -q
   ```
 
-- Install `hatch` in your environment and run tests:
+- Run pre-commit checks before submitting a PR:
 
   ```sh
-  pip install hatch  # Other ways of installing hatch: https://hatch.pypa.io/dev/install/
-  hatch shell
-  hatch test
+  uvx pre-commit run --all-files
   ```
 
-  (Alternative) Use the Devcontainer which has all the dependencies installed:
+- (Alternative) Use the Devcontainer which has all the dependencies installed:
 
   ```sh
   # Reopen the project in Devcontainer and run:
-  hatch test
+  uv run pytest packages/*/tests/ -q
   ```
-
-- Run pre-commit checks before submitting a PR: `pre-commit run --all-files`
 
 ### Security Considerations
 
