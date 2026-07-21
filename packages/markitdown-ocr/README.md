@@ -170,21 +170,20 @@ The plugin propagates LLM API errors as warnings and continues conversion. Check
 ### Running Tests
 
 ```bash
-cd packages/markitdown-ocr
-pytest tests/ -v
+uv run pytest packages/markitdown-ocr/tests/ -v
 ```
 
 ### Building from Source
 
 ```bash
-git clone https://github.com/microsoft/markitdown.git
-cd markitdown/packages/markitdown-ocr
-pip install -e .
+git clone https://github.com/sakoho81/markitdown.git
+cd markitdown
+uv sync --all-packages
 ```
 
 ## Contributing
 
-Contributions are welcome! See the [MarkItDown repository](https://github.com/microsoft/markitdown) for guidelines.
+Contributions are welcome! See the [MarkItDown repository](https://github.com/sakoho81/markitdown) for guidelines.
 
 ## License
 

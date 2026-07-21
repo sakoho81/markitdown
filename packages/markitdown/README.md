@@ -3,10 +3,10 @@
 > [!TIP]
 > MarkItDown is a Python package and command-line utility for converting various files to Markdown (e.g., for indexing, text analysis, etc). 
 >
-> For more information, and full documentation, see the project [README.md](https://github.com/microsoft/markitdown) on GitHub.
+> For more information, and full documentation, see the project [README.md](https://github.com/sakoho81/markitdown) on GitHub.
 
 > [!IMPORTANT]
-> MarkItDown performs I/O with the privileges of the current process. Like open() or requests.get(), it will access resources that the process itself can access. Sanitize your inputs in untrusted environments, and call the narrowest `convert_*` function needed for your use case (e.g., `convert_stream()`, or `convert_local()`). See the [Security Considerations](https://github.com/microsoft/markitdown#security-considerations) section of the documentation for more information.
+> MarkItDown performs I/O with the privileges of the current process. Like open() or requests.get(), it will access resources that the process itself can access. Sanitize your inputs in untrusted environments, and call the narrowest `convert_*` function needed for your use case (e.g., `convert_stream()`, or `convert_local()`). See the [Security Considerations](https://github.com/sakoho81/markitdown#security-considerations) section of the documentation for more information.
 
 ## Installation
 
@@ -16,12 +16,18 @@ From PyPI:
 pip install markitdown[all]
 ```
 
+Or install as a global tool with uv:
+
+```bash
+uv tool install './packages/markitdown[all]'
+```
+
 From source:
 
 ```bash
-git clone git@github.com:microsoft/markitdown.git
+git clone git@github.com:sakoho81/markitdown.git
 cd markitdown
-pip install -e packages/markitdown[all]
+uv sync --all-packages
 ```
 
 ## Usage
@@ -30,6 +36,12 @@ pip install -e packages/markitdown[all]
 
 ```bash
 markitdown path-to-file.pdf > document.md
+```
+
+Or from within the repo:
+
+```bash
+uv run markitdown path-to-file.pdf -o document.md
 ```
 
 ### Python API
@@ -44,7 +56,7 @@ print(result.text_content)
 
 ### More Information
 
-For more information, and full documentation, see the project [README.md](https://github.com/microsoft/markitdown) on GitHub.
+For more information, and full documentation, see the project [README.md](https://github.com/sakoho81/markitdown) on GitHub.
 
 ## Trademarks
 
